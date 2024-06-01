@@ -3,6 +3,7 @@ import {getServerSession} from "next-auth";
 import {authOptions} from "@/lib/auth";
 import {redirect} from "next/navigation";
 import Link from "next/link";
+import {CustomerCard} from "@/app/dashboard/customer/components/card";
 
 export default async function Customer() {
 
@@ -23,7 +24,10 @@ export default async function Customer() {
                     </Link>
                 </div>
                 <section>
-                    
+                    <CustomerCard/>
+                    <CustomerCard/>
+                    <CustomerCard/>
+                    <CustomerCard/>
                 </section>
             </main>
         </Container>
