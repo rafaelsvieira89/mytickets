@@ -3,6 +3,7 @@ import {getServerSession} from "next-auth";
 import {authOptions} from "@/lib/auth";
 import {redirect} from "next/navigation";
 import Link from "next/link";
+import {TicketItem} from "@/app/dashboard/components/ticket";
 
 export default async function Dashboard() {
     const session = await getServerSession(authOptions)
@@ -26,7 +27,7 @@ export default async function Dashboard() {
                         <th className="font-medium text-left pl-1">
                             Cliente
                         </th>
-                        <th className="font-medium text-left">
+                        <th className="font-medium text-left hidden sm:block">
                             Cadastro
                         </th>
                         <th className="font-medium text-left">
@@ -38,7 +39,7 @@ export default async function Dashboard() {
                     </tr>
                     </thead>
                     <tbody>
-                    
+                        <TicketItem/>
                     </tbody>
                 </table>
             </main>

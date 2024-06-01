@@ -1,5 +1,5 @@
 import {ReactNode} from "react";
-import {DashboardHeader} from "@/app/dashboard/components";
+import {DashboardHeader} from "@/app/dashboard/components/header";
 
 export default function DashboardLayout({children}:{children: ReactNode}){
     return(
