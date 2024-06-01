@@ -11,12 +11,15 @@ const schema = z.object({
         return /^(?:\(d{2}\)\s?)?\d{9}$/.test(value) || /^\d{2}\s\d{9}$/.test(value) || /^\d{11}$/.test(value)
     },{
         message: "O numero de telegone deve estar no formato (DD) 999999999"
-    })
+    }),
+    address: z.string()
 })
+
+type FormData = z.infer<typeof schema>
 
 export function NewCustomerForm(){
 
-    const {} = useForm({
+    const {register, handleSubmit, formState} = useForm<FormData>({
         resolver: zodResolver(schema)
     })
 
