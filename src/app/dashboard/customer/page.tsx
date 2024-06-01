@@ -19,7 +19,7 @@ export default async function Customer() {
                     <h1 className="text-3xl font-bold">
                         Meus clientes
                     </h1>
-                    <Link href="/dashboar/customer/new" className="bg-blue-500 rounded text-white px-4 py-1">
+                    <Link href="/dashboard/customer/new" className="bg-blue-500 rounded text-white px-4 py-1">
                         Novo cliente
                     </Link>
                 </div>
