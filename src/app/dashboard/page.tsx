@@ -20,6 +20,27 @@ export default async function Dashboard() {
                         Abrir Chamado
                     </Link>
                 </div>
+                <table className="w-full my-2">
+                    <thead>
+                    <tr>
+                        <th className="font-medium text-left pl-1">
+                            Cliente
+                        </th>
+                        <th className="font-medium text-left">
+                            Cadastro
+                        </th>
+                        <th className="font-medium text-left">
+                            Status
+                        </th>
+                        <th className="font-medium text-left">
+                            #
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                </table>
             </main>
         </Container>
     )
