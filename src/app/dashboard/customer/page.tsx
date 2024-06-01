@@ -23,7 +23,7 @@ export default async function Customer() {
                         Novo cliente
                     </Link>
                 </div>
-                <section>
+                <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-2">
                     <CustomerCard/>
                     <CustomerCard/>
                     <CustomerCard/>

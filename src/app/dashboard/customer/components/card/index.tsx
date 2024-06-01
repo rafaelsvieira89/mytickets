@@ -2,8 +2,7 @@ export function CustomerCard() {
     return (
         <article className="flex flex-col bg-gray-100 border-2 p-2 rounded-lg hover:scale-105 duration-300">
             <h2>
-                <a className="font-bold">Nome:</a>
-                Customer Card</h2>
+                <a className="font-bold">Nome:</a> Customer Name</h2>
             <p>
                 <a className="font-bold">Email:</a> teste@teste.com
             </p>
