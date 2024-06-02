@@ -4,6 +4,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {z} from "zod";
 import {Input} from "@/components/input";
 import {api} from "@/lib/api";
+import {useRouter} from "next/navigation";
 
 
 const schema = z.object({
@@ -29,15 +30,19 @@ export function NewCustomerForm({userId}: {userId: string}) {
         resolver: zodResolver(schema)
     })
 
+    const router = useRouter()
+
     async function handleSubmitCustomer(data: FormData) {
 
-        const response = await api.post("/api/customer",{
+        await api.post("/api/customer",{
             name: data.name,
             phone: data.phone,
             email: data.email,
             address: data.address,
             userId: userId
         })
+
+        router.replace("/dashboard/customer")
 
 
     }
