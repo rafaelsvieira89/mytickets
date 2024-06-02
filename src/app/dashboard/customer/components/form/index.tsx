@@ -30,6 +30,9 @@ export function NewCustomerForm() {
 
     function handleSubmitCustomer(data: FormData) {
         console.log(data)
+
+
+
     }
 
     return (
