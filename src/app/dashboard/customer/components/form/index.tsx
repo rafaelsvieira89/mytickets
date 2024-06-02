@@ -3,6 +3,7 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {z} from "zod";
 import {Input} from "@/components/input";
+import {api} from "@/lib/api";
 
 
 const schema = z.object({
@@ -18,7 +19,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>
 
-export function NewCustomerForm() {
+export function NewCustomerForm({userId}: {userId: string}) {
 
     const {
         register,
@@ -28,9 +29,15 @@ export function NewCustomerForm() {
         resolver: zodResolver(schema)
     })
 
-    function handleSubmitCustomer(data: FormData) {
-        console.log(data)
+    async function handleSubmitCustomer(data: FormData) {
 
+        const response = await api.post("/api/customer",{
+            name: data.name,
+            phone: data.phone,
+            email: data.email,
+            address: data.address,
+            userId: userId
+        })
 
 
     }
