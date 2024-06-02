@@ -20,7 +20,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>
 
-export function NewCustomerForm({userId}: {userId: string}) {
+export function NewCustomerForm({userId}: { userId: string }) {
 
     const {
         register,
@@ -34,14 +34,14 @@ export function NewCustomerForm({userId}: {userId: string}) {
 
     async function handleSubmitCustomer(data: FormData) {
 
-        await api.post("/api/customer",{
+        await api.post("/api/customer", {
             name: data.name,
             phone: data.phone,
             email: data.email,
             address: data.address,
             userId: userId
         })
-
+        router.refresh() //para garantir que vai bater no backend antes do redirect
         router.replace("/dashboard/customer")
 
 
