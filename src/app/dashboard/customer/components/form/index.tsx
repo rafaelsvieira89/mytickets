@@ -2,6 +2,7 @@
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {z} from "zod";
+import {Input} from "@/components/input";
 
 
 const schema = z.object({
@@ -19,14 +20,22 @@ type FormData = z.infer<typeof schema>
 
 export function NewCustomerForm(){
 
-    const {register, handleSubmit, formState} = useForm<FormData>({
+    const {register,
+        handleSubmit,
+        formState: {errors}} = useForm<FormData>({
         resolver: zodResolver(schema)
     })
 
     return(
-        <form>
-            <label>Nome completo</label>
-            <input type="text" placeholder="Digite nome completo"/>
+        <form className="flex flex-col mt-6">
+            <label className="mb-1">Nome completo</label>
+            <Input
+                type="text"
+                name="name"
+                placeholder="Digite o nome completo"
+                error={errors.name?.message}
+                register={register}
+            />
         </form>
     )
 }
