@@ -3,7 +3,7 @@ import {getServerSession} from "next-auth";
 import {authOptions} from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
-export async function DELETE(request: Request){
+export async function DELETE(request: Request) {
 
     const session = await getServerSession(authOptions)
     if (!session || !session.user)
@@ -14,6 +14,15 @@ export async function DELETE(request: Request){
     if (!id) {
         return NextResponse.json({error: "ID não fornecido"}, {status: 400});
     }
+
+    const findTickets = await prisma.ticket.findFirst({
+        where: {
+            customerId: id //id do cliente passado por parametro na url
+        }
+    })
+    if (findTickets)
+        return NextResponse.json({error: "Não é possível excluir clientes que possuem chamados"}, {status: 400});
+
     try {
         await prisma.customer.delete({
             where: {
