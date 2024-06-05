@@ -30,6 +30,7 @@ model Customer {
 
 model Ticket {
   id String @id @default(auto()) @map("_id") @db.ObjectId
+  code String
   name String
   description String
   status String
@@ -41,6 +42,35 @@ model Ticket {
 
   userId String @db.ObjectId
   user User @relation(fields: [userId], references: [id])
+
+  attachments Attachment[]
+
+  @@unique([code])
+}
+
+model Attachment {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+
+  ticketId String @db.ObjectId
+  tickt Ticket @relation(fields: [ticketId], references: [id])
+
+  userId String @db.ObjectId
+  user User @relation(fields: [userId], references: [id])
+
+}
+
+model TicketItem {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  description String
+  created_at DateTime? @default(now())
+  userId String @db.ObjectId
+  user User @relation(fields: [userId], references: [id])
+
 }
 
 model User {
@@ -59,6 +89,10 @@ model User {
 
   tickets Ticket[]
   customers Customer[]
+
+  ticketItems TicketItem[]
+
+  attachments Attachment[]
 }
 
 model Account {
