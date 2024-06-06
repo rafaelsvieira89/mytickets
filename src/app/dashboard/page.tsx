@@ -14,19 +14,24 @@ export default async function Dashboard() {
     }
 
     const organization = await prisma.organization.findFirst({
-        where:{
+        where: {
             userId: session.user.id
         }
     })
 
-    if(!organization)
+    if (!organization)
         redirect("/organization/new")
 
-    const tickets = await prisma.ticket.findMany(
-        { where: { userId: session.user.id },
-        include: {
-            customer: true
-        }}
+    const tickets = await prisma.ticket.findMany({
+            where: {
+                customer: {
+                    organizationId: organization.id
+                }
+            },
+            include: {
+                customer: true
+            }
+        }
     )
 
     return (
