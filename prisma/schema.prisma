@@ -40,7 +40,9 @@ model Customer {
   updated_at DateTime? @default(now())
 
   userId String @db.ObjectId
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], name: "usuario_criacao", onDelete: NoAction, onUpdate: NoAction)
+
+  users User[]
 
   organizationId String @db.ObjectId
   organization Organization @relation(fields: [organizationId], references: [id])
@@ -117,8 +119,10 @@ model User {
 
 
   tickets Ticket[]
-  customers Customer[]
+  customers Customer[] @relation(name: "usuario_criacao")
 
+  customerId String? @db.ObjectId
+  customer Customer? @relation(fields: [customerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   ticketItems TicketItem[]
 
