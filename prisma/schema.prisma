@@ -13,6 +13,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Organization {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  phone String
+  email String
+  address String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  users User[]
+  customers Customer[]
+
+}
+
 model Customer {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
@@ -25,7 +39,11 @@ model Customer {
   userId String @db.ObjectId
   user User @relation(fields: [userId], references: [id])
 
+  organizationId String @db.ObjectId
+  organization Organization @relation(fields: [organizationId], references: [id])
+
   tickets Ticket[]
+
 }
 
 model Ticket {
@@ -87,8 +105,13 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  organizationId String? @db.ObjectId
+  organization Organization? @relation(fields: [organizationId], references: [id])
+
+
   tickets Ticket[]
   customers Customer[]
+
 
   ticketItems TicketItem[]
 

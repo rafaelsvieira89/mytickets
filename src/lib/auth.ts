@@ -3,6 +3,7 @@ import type {Adapter} from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google"
 import {AuthOptions} from "next-auth";
 import prismaClient from "@/lib/prisma";
+import {Organization} from "@prisma/client";
 
 
 export const authOptions: AuthOptions = {
@@ -18,7 +19,8 @@ export const authOptions: AuthOptions = {
             session.user = {...session.user, id: user.id} as {
                 id: string,
                 name: string,
-                email: string
+                email: string,
+                organization?: Organization
             }
             return session
         }

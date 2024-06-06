@@ -9,7 +9,7 @@ import prisma from "@/lib/prisma";
 export default async function Dashboard() {
     const session = await getServerSession(authOptions)
 
-    if (!session || !session.user) {
+    if (!session || !session.user || session.user.organization) {
         redirect("/")
     }
 
