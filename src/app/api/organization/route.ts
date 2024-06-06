@@ -7,8 +7,6 @@ export async function POST(req: Request){
 
     const session = await getServerSession(authOptions)
 
-
-
     const {name, email, phone} = await req.json()
 
     try{
@@ -33,7 +31,7 @@ export async function POST(req: Request){
 
         return NextResponse.json({message: "Organização cadastrada com sucesso"})
     }catch (err){
-        return NextResponse.json({message: "Erro ao cadastrar organizacao"}, {status: 400})
+        return NextResponse.json({message: "Erro ao cadastrar organização"}, {status: 400})
     }
 
 }

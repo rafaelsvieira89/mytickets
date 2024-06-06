@@ -12,10 +12,17 @@ export default async function Customer() {
 
     if (!session || !session.user)
         redirect("/")
+    const organization = await prisma.organization.findFirst({
+        where:{
+            id: session.user.id
+        }
+    })
+    if (!organization)
+        redirect("/")
 
     const customers = await prisma.customer.findMany({
         where:{
-            userId: session.user.id
+            organizationId: organization.id
         }
     })
 
