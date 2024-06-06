@@ -5,8 +5,8 @@ import {z} from "zod"
 import {zodResolver} from "@hookform/resolvers/zod";
 
 const schema = z.object({
-    name: z.string(),
-    email: z.string().email(),
+    name: z.string().min(1, "Informe o nome da organização"),
+    email: z.string().email("Informe o email da organização"),
     phone: z.string()
 })
 
@@ -20,9 +20,12 @@ export function OrganizationForm(){
         resolver: zodResolver(schema)
     })
 
+    function handleSubmitOrganization(formData: FormData){
+        console.log(formData)
+    }
 
     return(
-        <form>
+        <form onSubmit={handleSubmit(handleSubmitOrganization)}>
             <label>Nome:</label>
             <Input
                 error={errors.name?.message}
@@ -35,6 +38,7 @@ export function OrganizationForm(){
             <Input type="text"
                    error={errors.email?.message}
                    placeholder="Informe o nome da oraganização" name="email" register={register}/>
+            <button type="submit">Cadastrar</button>
         </form>
     )
 }
