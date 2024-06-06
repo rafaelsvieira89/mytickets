@@ -43,13 +43,13 @@ export async function POST(request: Request) {
 
     const organization = await prisma.organization.findFirst({
         where:{
-            id: session.user.id
+            userId: session.user.id
         }
     })
 
 
     if (!organization)
-        return NextResponse.json({error: "Não autorizado"}, {status: 401})
+        return NextResponse.json({error: "Não autorizado, usuário sem organização definida"}, {status: 401})
 
     const {name, phone, email, address, userId} = await request.json()
 

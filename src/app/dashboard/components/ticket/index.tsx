@@ -7,7 +7,7 @@ export function TicketItem({ticket}: {ticket: TicketProps}){
             <tr className="border-b-2 border-b-slate-200 h-16 last:border-b-0 bg-slate-100 hover:bg-gray-200 duration-300">
                 <td className="text-left pl-1">
                     {ticket.customer.name}</td>
-                <td className="text-left pl-1 hidden sm:block">
+                <td className="text-left pl-1 hidden sm:table-cell">
                     {ticket.code}</td>
                 <td className="text-left pl-1">
                     {ticket.name}</td>

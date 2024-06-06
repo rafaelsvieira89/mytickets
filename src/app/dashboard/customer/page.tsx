@@ -14,9 +14,10 @@ export default async function Customer() {
         redirect("/")
     const organization = await prisma.organization.findFirst({
         where:{
-            id: session.user.id
+            userId: session.user.id
         }
     })
+    console.log(organization)
     if (!organization)
         redirect("/")
 

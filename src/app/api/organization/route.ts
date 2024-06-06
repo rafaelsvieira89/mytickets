@@ -6,6 +6,8 @@ import {authOptions} from "@/lib/auth";
 export async function POST(req: Request){
 
     const session = await getServerSession(authOptions)
+    if(!session)
+        return NextResponse.json({error: "Sessão inválida"}, {status: 401})
 
     const {name, email, phone} = await req.json()
 
@@ -15,7 +17,7 @@ export async function POST(req: Request){
                 name,
                 phone,
                 email,
-                userId: session?.user.id
+                userId: session.user.id
 
             }
         })

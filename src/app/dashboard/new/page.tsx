@@ -10,6 +10,13 @@ export default async function NewTicket() {
     const session = await getServerSession(authOptions)
     if(!session || !session.user)
         redirect("/")
+    const organization = await prisma.organization.findFirst({
+        where:{
+            userId: session.user.id
+        }
+    })
+    if (!organization)
+        redirect("/")
 
 
     const customers = await prisma.customer.findMany({

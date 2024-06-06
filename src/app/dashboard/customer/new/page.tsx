@@ -4,12 +4,20 @@ import {getServerSession} from "next-auth";
 import {authOptions} from "@/lib/auth";
 import {redirect} from "next/navigation";
 import {NewCustomerForm} from "@/app/dashboard/customer/components/form";
+import prisma from "@/lib/prisma";
 
 export default async function NewCustomer() {
 
     const session = await getServerSession(authOptions)
 
     if(!session || !session.user)
+        redirect("/")
+    const organization = await prisma.organization.findFirst({
+        where:{
+            userId: session.user.id
+        }
+    })
+    if (!organization)
         redirect("/")
 
     return (

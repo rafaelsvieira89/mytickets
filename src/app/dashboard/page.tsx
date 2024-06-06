@@ -49,7 +49,7 @@ export default async function Dashboard() {
                         <th className="font-medium text-left pl-1">
                             Cliente
                         </th>
-                        <th className="font-medium text-left hidden sm:block pl-1">
+                        <th className="font-medium text-left hidden sm:table-cell pl-1">
                             Ticket
                         </th>
                         <th className="font-medium text-left pl-1">
