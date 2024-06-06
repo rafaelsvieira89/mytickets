@@ -22,9 +22,12 @@ model Organization {
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
 
+  userId String @db.ObjectId
+  user User @relation(fields: [userId], references: [id], name: "organization_owner", onDelete: NoAction, onUpdate: NoAction)
+
   users User[]
   customers Customer[]
-
+  @@unique([id, userId])
 }
 
 model Customer {
@@ -105,8 +108,12 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+
+
   organizationId String? @db.ObjectId
-  organization Organization? @relation(fields: [organizationId], references: [id])
+  organization Organization? @relation(fields: [organizationId], references: [id],  onDelete: NoAction, onUpdate: NoAction)
+
+  ownedOrganization Organization[] @relation(name: "organization_owner")
 
 
   tickets Ticket[]

@@ -3,6 +3,7 @@ import {Input} from "@/components/input";
 import {useForm} from "react-hook-form";
 import {z} from "zod"
 import {zodResolver} from "@hookform/resolvers/zod";
+import {api} from "@/lib/api";
 
 const schema = z.object({
     name: z.string().min(1, "Informe o nome da organização"),
@@ -20,8 +21,12 @@ export function OrganizationForm(){
         resolver: zodResolver(schema)
     })
 
-    function handleSubmitOrganization(formData: FormData){
-        console.log(formData)
+    async function handleSubmitOrganization(formData: FormData){
+        await api.post("/api/organization", {
+            name: formData.name,
+            phone: formData.phone,
+            email: formData.email
+        })
     }
 
     return(

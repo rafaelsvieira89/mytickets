@@ -9,9 +9,18 @@ import prisma from "@/lib/prisma";
 export default async function Dashboard() {
     const session = await getServerSession(authOptions)
 
-    if (!session || !session.user || session.user.organization) {
+    if (!session || !session.user) {
         redirect("/")
     }
+
+    const organization = await prisma.organization.findFirst({
+        where:{
+            userId: session.user.id
+        }
+    })
+
+    if(!organization)
+        redirect("/organization/new")
 
     const tickets = await prisma.ticket.findMany(
         { where: { userId: session.user.id },
