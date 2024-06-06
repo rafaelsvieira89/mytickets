@@ -14,7 +14,10 @@ export default async function Dashboard() {
     }
 
     const tickets = await prisma.ticket.findMany(
-        { where: { userId: session.user.id } }
+        { where: { userId: session.user.id },
+        include: {
+            customer: true
+        }}
     )
 
     return (
@@ -32,13 +35,19 @@ export default async function Dashboard() {
                         <th className="font-medium text-left pl-1">
                             Cliente
                         </th>
+                        <th className="font-medium text-left hidden sm:block pl-1">
+                            Ticket
+                        </th>
+                        <th className="font-medium text-left pl-1">
+                            Assunto
+                        </th>
                         <th className="font-medium text-left hidden sm:block">
-                            Cadastro
+                            Abertura
                         </th>
                         <th className="font-medium text-left">
                             Status
                         </th>
-                        <th className="font-medium text-left">
+                        <th className="font-medium text-left hidden sm:block">
                             #
                         </th>
                     </tr>
