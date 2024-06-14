@@ -16,7 +16,20 @@ export async function PATCH(req: Request, res: Response) {
         }
     })
 
-    console.log(findTicket)
+    if(!findTicket)
+        return NextResponse.json({error: "Ticket deste id não encontrado"}, {status: 400});
 
-    return NextResponse.json({message: "Teste chamada"})
+    try{
+        await prisma.ticket.update({
+            where: {
+                id: id as string
+            },
+            data:{
+                status: "FECHADO"
+            }
+        })
+        return NextResponse.json({error: "Ticket atualizado para os status FECHADO"}, {status: 200});
+    }catch (err){
+        return NextResponse.json({error: "Falha ao atualizar tocket"}, {status: 400});
+    }
 }
