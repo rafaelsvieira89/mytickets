@@ -2,12 +2,14 @@
 import {FiCheckSquare, FiFile} from "react-icons/fi";
 import {TicketProps} from "@/utils/ticket.type";
 import {api} from "@/lib/api";
+import {useRouter} from "next/navigation";
 
 export function TicketItem({ticket}: {ticket: TicketProps}){
+    const router = useRouter();
     async function handleChangeStatus() {
         try {
             const resp = await api.patch("/api/ticket", {id: ticket.id})
-            console.log(resp)
+            router.refresh()
         }catch (err){
             console.error(err)
         }

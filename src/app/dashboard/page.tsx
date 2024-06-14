@@ -73,11 +73,12 @@ export default async function Dashboard() {
                             <TicketItem key={item.id} ticket={item}/>
                         ))
                     )}
-                    {tickets.length === 0 && (
-                        <h1>Não encontramos chamados abertos...</h1>
-                    )}
+
                     </tbody>
                 </table>
+                {tickets.length === 0 && (
+                    <h1>Não encontramos chamados abertos...</h1>
+                )}
             </main>
         </Container>
     )
