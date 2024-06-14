@@ -2,14 +2,25 @@
 
 import {useContext, useRef, MouseEvent} from "react";
 import {ModalContext} from "@/providers/modal";
+import {TicketProps} from "@/utils/ticket.type";
+import {CustomerProps} from "@/utils/customer.type";
 
-export function ModalTicket() {
+interface TicketInfo{
+    ticket: TicketProps;
+    customer: CustomerProps | null;
+}
+
+interface ModalTicketProps {
+    ticket?: TicketInfo | undefined
+}
+
+export function ModalTicket({ticket}: ModalTicketProps) {
 
     const {handleModalVisible} = useContext(ModalContext)
     const modalRef = useRef<HTMLDivElement | null>(null);
 
     function handleCloseModal(e: MouseEvent<HTMLDivElement>) {
-        if(modalRef.current && !modalRef.current.contains(e.target as Node)){
+        if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
             handleModalVisible()
         }
     }
@@ -27,12 +38,12 @@ export function ModalTicket() {
 
                     <div className="flex gap-1 flex-wrap mb-2">
                         <h2 className="font-bold">Nome:</h2>
-                        <p>Problema nos robos</p>
+                        <p>{ticket?.ticket?.name}</p>
                     </div>
 
                     <div className="flex flex-col flex-wrap gap-1 mb-2">
                         <h2 className="font-bold">Descrição:</h2>
-                        <p>Problema nos robos descritos</p>
+                        <p>{ticket?.ticket?.description}</p>
                     </div>
 
                     <div className="w-full border-b-[1.5px] my-4"></div>
@@ -40,17 +51,17 @@ export function ModalTicket() {
 
                     <div className="flex gap-1 flex-wrap mb-2">
                         <h2 className="font-bold">Nome:</h2>
-                        <p>Unimed Nordeste RS</p>
+                        <p>{ticket?.customer?.name}</p>
                     </div>
 
                     <div className="flex gap-1 flex-wrap mb-2">
                         <h2 className="font-bold">Telefone:</h2>
-                        <p>(54) 9999999990</p>
+                        <p>{ticket?.customer?.phone}</p>
                     </div>
 
                     <div className="flex gap-1 flex-wrap mb-2">
                         <h2 className="font-bold">Email:</h2>
-                        <p>suporte@unimed.com</p>
+                        <p>{ticket?.customer?.email}</p>
                     </div>
 
                 </div>
