@@ -1,5 +1,6 @@
 "use client"
 import {createContext, ReactNode, useState} from "react";
+import {ModalTicket} from "@/components/modal";
 
 interface ModalContextData{
     visible:boolean
@@ -15,6 +16,7 @@ export const ModalProvider = ({children}:{children: ReactNode}) => {
     }
     return(
         <ModalContext.Provider value={{visible, handleModalVisible}}>
+            {!visible && <ModalTicket/>}
             {children}
         </ModalContext.Provider>
     )
