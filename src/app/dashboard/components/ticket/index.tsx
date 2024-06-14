@@ -9,7 +9,7 @@ import {ModalContext} from "@/providers/modal";
 export function TicketItem({ticket}: {ticket: TicketProps}){
     const router = useRouter();
 
-    const {handleModalVisible} = useContext(ModalContext)
+    const {handleModalVisible, setDetailTicket} = useContext(ModalContext)
 
     async function handleChangeStatus() {
         try {
@@ -22,6 +22,10 @@ export function TicketItem({ticket}: {ticket: TicketProps}){
 
     function handleOpenModal() {
         handleModalVisible();
+        setDetailTicket({
+            ticket: ticket,
+            customer: ticket.customer
+        })
     }
 
     return(
