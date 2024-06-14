@@ -28,7 +28,7 @@ export default function OpenTicket() {
                                error={errors.email?.message}/>
                         <button
                             className="flex bg-blue-500 flex-row gap-3 px-2 h-11
-                                text-white items-center justify-center rounded active:bg-blue-400">
+                                text-white items-center justify-center rounded active:bg-blue-400 font-bold">
                             Procurar cliente
                             <FiSearch size={24} color="#FFF"/>
                         </button>
