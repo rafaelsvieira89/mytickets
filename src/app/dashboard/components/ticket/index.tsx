@@ -26,7 +26,9 @@ export function TicketItem({ticket}: {ticket: TicketProps}){
                     {ticket.created_at?.toLocaleDateString("pt-BR")}
                 </td>
                 <td className="text-left">
+
                     <span className="bg-green-500 px-2 py-1 rounded">{ticket.status}</span></td>
+
                 <td className="text-left hidden sm:table-cell">
                     <button className="mr-2" onClick={handleChangeStatus}>
                         <FiCheckSquare size={24} color="#131313"/>
