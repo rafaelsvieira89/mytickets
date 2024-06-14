@@ -16,7 +16,7 @@ export const ModalProvider = ({children}:{children: ReactNode}) => {
     }
     return(
         <ModalContext.Provider value={{visible, handleModalVisible}}>
-            {!visible && <ModalTicket/>}
+            {visible && <ModalTicket/>}
             {children}
         </ModalContext.Provider>
     )
