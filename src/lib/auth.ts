@@ -3,7 +3,7 @@ import type {Adapter} from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google"
 import {AuthOptions} from "next-auth";
 import prismaClient from "@/lib/prisma";
-import {Organization} from "@prisma/client";
+import Email from "next-auth/providers/email";
 
 
 export const authOptions: AuthOptions = {
@@ -12,7 +12,8 @@ export const authOptions: AuthOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
-        })
+        }),
+
     ],
     callbacks:{
         async session({session, token, user}){

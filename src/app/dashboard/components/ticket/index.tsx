@@ -1,7 +1,18 @@
-import {FiFile, FiTrash2} from "react-icons/fi";
+"use client"
+import {FiCheckSquare, FiFile} from "react-icons/fi";
 import {TicketProps} from "@/utils/ticket.type";
+import {api} from "@/lib/api";
 
 export function TicketItem({ticket}: {ticket: TicketProps}){
+    async function handleChangeStatus() {
+        try {
+            const resp = await api.patch("/api/ticket", {id: ticket.id})
+            console.log(resp)
+        }catch (err){
+            console.error(err)
+        }
+    }
+
     return(
         <>
             <tr className="border-b-2 border-b-slate-200 h-16 last:border-b-0 bg-slate-100 hover:bg-gray-200 duration-300">
@@ -17,8 +28,8 @@ export function TicketItem({ticket}: {ticket: TicketProps}){
                 <td className="text-left">
                     <span className="bg-green-500 px-2 py-1 rounded">{ticket.status}</span></td>
                 <td className="text-left hidden sm:table-cell">
-                    <button className="mr-2">
-                        <FiTrash2 size={24} color="#ef4444"/>
+                    <button className="mr-2" onClick={handleChangeStatus}>
+                        <FiCheckSquare size={24} color="#131313"/>
                     </button>
                     <button>
                         <FiFile size={24} color="#3b82f6"/>
